@@ -1,0 +1,40 @@
+name: Release with Two Files
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Prepare files
+        run: |
+          #  Replace these commands with the commands to build
+          #  your files, or copy them to the release directory.
+          mkdir release_files
+          echo "File 1 content" > release_files/file1.txt
+          echo "File 2 content" > release_files/file2.dat
+
+      - name: Upload file1.txt
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }} # Use the upload_url from the release event
+          asset_path: release_files/file1.txt
+          asset_name: file1.txt
+          asset_content_type: text/plain
+
+      - name: Upload file2.dat
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }} #  Use the upload_url from the release event
+          asset_path: release_files/file2.dat
+          asset_name: file2.dat
+          asset_content_type: application/octet-stream
