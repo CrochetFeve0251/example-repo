@@ -22,7 +22,7 @@ jobs:
       - name: Upload file1.txt
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }} # Use the upload_url from the release event
           asset_path: release_files/file1.txt
@@ -32,7 +32,7 @@ jobs:
       - name: Upload file2.dat
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }} #  Use the upload_url from the release event
           asset_path: release_files/file2.dat
